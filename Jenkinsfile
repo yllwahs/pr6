@@ -5,10 +5,6 @@ pipeline {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Выберите окружение для деплоя')
     }
 
-    options {
-        cleanWs()
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -45,10 +41,6 @@ pipeline {
     }
 
     post {
-        always {
-            cleanWs()
-            echo "Pipeline для окружения ${params.ENV} завершен"
-        }
         success {
             echo "Деплой на ${params.ENV} прошел успешно!"
         }
